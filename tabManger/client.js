@@ -526,13 +526,13 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TabManagerWorkerCaller = void 0;
+exports.TabsManagerWorkerCaller = void 0;
 var events_1 = __webpack_require__(187);
 var uuid_1 = __webpack_require__(614);
 var helper_1 = __webpack_require__(949);
-var TabManagerWorkerCaller = /** @class */ (function (_super) {
-    __extends(TabManagerWorkerCaller, _super);
-    function TabManagerWorkerCaller(options) {
+var TabsManagerWorkerCaller = /** @class */ (function (_super) {
+    __extends(TabsManagerWorkerCaller, _super);
+    function TabsManagerWorkerCaller(options) {
         var _a;
         var _this = _super.call(this) || this;
         _this.isActive = true;
@@ -562,19 +562,19 @@ var TabManagerWorkerCaller = /** @class */ (function (_super) {
         _this.id = (0, uuid_1.v4)();
         return _this;
     }
-    TabManagerWorkerCaller.prototype.init = function () {
+    TabsManagerWorkerCaller.prototype.init = function () {
         this.initWorker();
         this.initWorkerListener();
         this.initDomListener();
     };
-    TabManagerWorkerCaller.prototype.initWorker = function () {
+    TabsManagerWorkerCaller.prototype.initWorker = function () {
         if (!window.SharedWorker) {
             this.error('ShareWorker not support!');
             return;
         }
         this.workerInstance = new SharedWorker(this.workerPath, this.workerName);
     };
-    TabManagerWorkerCaller.prototype.initWorkerListener = function () {
+    TabsManagerWorkerCaller.prototype.initWorkerListener = function () {
         var _this = this;
         this.workerInstance.port.addEventListener('message', function (e) {
             console.log('eeee', e);
@@ -582,7 +582,7 @@ var TabManagerWorkerCaller = /** @class */ (function (_super) {
             if (type === helper_1.workerEvents.activeTabId) {
                 var isActive = id === _this.id;
                 _this.isActive = isActive;
-                _this.emit(helper_1.tabManagerEvents.activeTab, isActive);
+                _this.emit(helper_1.TabsManagerEvents.activeTab, isActive);
             }
         });
         this.workerInstance.onerror = function (ev) {
@@ -591,7 +591,7 @@ var TabManagerWorkerCaller = /** @class */ (function (_super) {
         };
         this.workerInstance.port.start();
     };
-    TabManagerWorkerCaller.prototype.initDomListener = function () {
+    TabsManagerWorkerCaller.prototype.initDomListener = function () {
         if (!this.workerInstance)
             return;
         window.addEventListener('focus', this.setActiveTab);
@@ -604,16 +604,16 @@ var TabManagerWorkerCaller = /** @class */ (function (_super) {
             this.checkActiveTab();
         }
     };
-    TabManagerWorkerCaller.prototype.sendMessage = function (data) {
+    TabsManagerWorkerCaller.prototype.sendMessage = function (data) {
         this.workerInstance.port.postMessage(data);
     };
-    TabManagerWorkerCaller.prototype.error = function (message) {
-        this.emit(helper_1.tabManagerEvents.error, message);
+    TabsManagerWorkerCaller.prototype.error = function (message) {
+        this.emit(helper_1.TabsManagerEvents.error, message);
     };
-    return TabManagerWorkerCaller;
+    return TabsManagerWorkerCaller;
 }(events_1.EventEmitter));
-exports.TabManagerWorkerCaller = TabManagerWorkerCaller;
-exports["default"] = TabManagerWorkerCaller;
+exports.TabsManagerWorkerCaller = TabsManagerWorkerCaller;
+exports["default"] = TabsManagerWorkerCaller;
 
 
 /***/ }),
@@ -623,16 +623,16 @@ exports["default"] = TabManagerWorkerCaller;
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.tabManagerEvents = exports.workerEvents = void 0;
+exports.TabsManagerEvents = exports.workerEvents = void 0;
 exports.workerEvents = {
-    activeTabId: 'tab-manager-active-tab-id',
-    setActiveTab: 'tab-manager-set-active-tab',
-    checkActiveTab: 'tab-manager-check-active-tab',
-    closeWindow: 'tab-manager-close-window',
+    activeTabId: 'tabs-manager-active-tab-id',
+    setActiveTab: 'tabs-manager-set-active-tab',
+    checkActiveTab: 'tabs-manager-check-active-tab',
+    closeWindow: 'tabs-manager-close-window',
 };
-exports.tabManagerEvents = {
-    error: 'tab-manager-error',
-    activeTab: 'tab-manager-active-tab',
+exports.TabsManagerEvents = {
+    error: 'tabs-manager-error',
+    activeTab: 'tabs-manager-active-tab',
 };
 
 
@@ -1355,11 +1355,11 @@ var __webpack_unused_export__;
 __webpack_unused_export__ = ({ value: true });
 var caller_1 = __webpack_require__(858);
 var helper_1 = __webpack_require__(949);
-var tabManager = new caller_1.TabManagerWorkerCaller({
+var tabManager = new caller_1.TabsManagerWorkerCaller({
     workerPath: 'worker.js',
 });
-tabManager.addListener(helper_1.tabManagerEvents.activeTab, function (isActive) {
-    document.title = isActive ? '🧐 active' : 'inactive';
+tabManager.addListener(helper_1.TabsManagerEvents.activeTab, function (isActive) {
+    document.title = isActive ? '✅ active' : 'inactive';
 });
 tabManager.init();
 

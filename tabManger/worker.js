@@ -7,16 +7,16 @@
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.tabManagerEvents = exports.workerEvents = void 0;
+exports.TabsManagerEvents = exports.workerEvents = void 0;
 exports.workerEvents = {
-    activeTabId: 'tab-manager-active-tab-id',
-    setActiveTab: 'tab-manager-set-active-tab',
-    checkActiveTab: 'tab-manager-check-active-tab',
-    closeWindow: 'tab-manager-close-window',
+    activeTabId: 'tabs-manager-active-tab-id',
+    setActiveTab: 'tabs-manager-set-active-tab',
+    checkActiveTab: 'tabs-manager-check-active-tab',
+    closeWindow: 'tabs-manager-close-window',
 };
-exports.tabManagerEvents = {
-    error: 'tab-manager-error',
-    activeTab: 'tab-manager-active-tab',
+exports.TabsManagerEvents = {
+    error: 'tabs-manager-error',
+    activeTab: 'tabs-manager-active-tab',
 };
 
 
@@ -27,12 +27,12 @@ exports.tabManagerEvents = {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TabManagerWorkerServer = void 0;
+exports.TabsManagerWorkerServer = void 0;
 var helper_1 = __webpack_require__(949);
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any,no-restricted-globals
 var globalSelf = self;
-var TabManagerWorkerServer = /** @class */ (function () {
-    function TabManagerWorkerServer() {
+var TabsManagerWorkerServer = /** @class */ (function () {
+    function TabsManagerWorkerServer() {
         var _this = this;
         this.connections = [];
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -69,7 +69,7 @@ var TabManagerWorkerServer = /** @class */ (function () {
             });
         };
     }
-    TabManagerWorkerServer.prototype.init = function () {
+    TabsManagerWorkerServer.prototype.init = function () {
         var _this = this;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         globalSelf.addEventListener('connect', function (e) {
@@ -79,10 +79,10 @@ var TabManagerWorkerServer = /** @class */ (function () {
             port.start();
         });
     };
-    return TabManagerWorkerServer;
+    return TabsManagerWorkerServer;
 }());
-exports.TabManagerWorkerServer = TabManagerWorkerServer;
-exports["default"] = TabManagerWorkerServer;
+exports.TabsManagerWorkerServer = TabsManagerWorkerServer;
+exports["default"] = TabsManagerWorkerServer;
 
 
 /***/ })
@@ -122,7 +122,7 @@ var __webpack_unused_export__;
 
 __webpack_unused_export__ = ({ value: true });
 var worker_1 = __webpack_require__(827);
-var server = new worker_1.TabManagerWorkerServer();
+var server = new worker_1.TabsManagerWorkerServer();
 server.init();
 
 })();

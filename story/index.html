@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>story</title>
+  <link href="./normalize.css" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="inputBox">
+    <textarea id="mainTitleInput" rows="4" cols="50">
+    </textarea>
+  </div>
+  <button id="makeImg">Make</button>
+<hr><hr>
+  <div class="box" id="box">
+    <div>
+      <h1 id="mainTitle"></h1>
+    </div>
+  </div>
+  <script src="./html2canvas.min.js"></script>
+  <script>
+    const button = document.querySelector('#makeImg');
+
+
+document.querySelector('#mainTitleInput').addEventListener('input', setValue);
+
+
+function setValue() {
+  document.querySelector('#mainTitle').innerHTML = document.querySelector('#mainTitleInput').value.trim();
+}
+
+function capture() {
+  const element = document.getElementById('box');
+  console.log('ele', element)
+  html2canvas(element).then(canvas => {
+    // Convert the canvas to an image
+    const imgData = canvas.toDataURL('image/png');
+
+    // Create a link element
+    const link = document.createElement('a');
+    link.download = 'topic.png'; // Set the name of the downloaded file
+    link.href = imgData; // Set the image data as the href attribute of the link
+
+    // Append the link to the document body
+    document.body.appendChild(link);
+
+    // Simulate a click on the link to trigger the download
+    link.click();
+
+    // Clean up - remove the link from the DOM
+    document.body.removeChild(link);
+  });
+}
+
+button.addEventListener('click', () => {
+  setValue();
+  capture();
+})
+  </script>
+</body>
+</html>

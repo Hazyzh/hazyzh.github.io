@@ -1,0 +1,58 @@
+.box {
+  background: url('./bg.jpg') no-repeat;
+  background-size: 100%;
+  width: 1200px;
+  height: 810px;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box div {
+  width: 100%;
+  background-color: #eeb54b59; /* 古皮书纸张的颜色，可以根据需要调整 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+h1 {
+  font-family: cursive;
+  font-size: 66px;
+  font-weight: bold;
+  color: #f7f7f7;
+  text-shadow: 4px 4px 2px rgb(10 7 7 / 79%);
+  letter-spacing: 2px;
+  border-radius: 10px;
+  display: inline-block;
+  padding: 20px 0;
+}
+
+.inputBox textarea {
+  font-size: 16px;
+  font-family: Arial;
+  color: black;
+  border: 1px solid black;
+  margin: 10px;
+  line-height: 1.5;
+}
+
+#makeImg {
+    margin: 0 40px;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: #3498db; /* 按钮背景颜色，可以根据需要调整 */
+    color: #fff; /* 按钮文字颜色，可以根据需要调整 */
+    border: 2px solid #2980b9; /* 按钮边框颜色，可以根据需要调整 */
+}
